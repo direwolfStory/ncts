@@ -1,12 +1,18 @@
 <?php
+
+	echo "HI";
 #-------------------------[Include]-------------------------#
 require_once('include/line_class.php');
 require_once('unirest-php-master/src/Unirest.php');
 #-------------------------[Token]-------------------------#
-$channelAccessToken = '/wl/iFk5MvSRqJWAgKZVuejXjn8380eS3ovw38+CkvZwuvj40iZEe4oqpVQLzUztfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7itgmyuUF7T5iWaMnpzcBIYdA4WoXstG+ST79Xbu6YoOWwdB04t89/1O/w1cDnyilFU='; 
+$channelAccessToken = '+RlsY/UNuJvTc40ql++1nnDp2HO4Y3+gqIof/3xHJNdc49sut0F5ZeJ5LDpBe78rfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7isUxf37s6NG1aVbi+u4XS57JZHsJNuU30aCEM2Yg38mrAdB04t89/1O/w1cDnyilFU='; 
 $channelSecret = '2193018a4071996c9cd5d066e1855a75';
 $fol = 'https://www.nctsc.com/nctsLineBot/';
+$hook = file_get_contents('php://input');
 #-------------------------[Events]-------------------------#
+
+
+
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 
 $userId     = $client->parseEvents()[0]['source']['userId'];
@@ -30,6 +36,7 @@ $msg_title     = $client->parseEvents()[0]['message']['title'];
 $msg_address   = $client->parseEvents()[0]['message']['address'];
 $msg_latitude  = $client->parseEvents()[0]['message']['latitude'];
 $msg_longitude = $client->parseEvents()[0]['message']['longitude'];
+
 
 
 
@@ -60,10 +67,6 @@ $pictureUrl =  $reline1['pictureUrl'];
 $statusMessage = $reline1['statusMessage'];
 
 
-
-
-
-#-------------------------[EVENT TYPE]-------------------------#
 if ($type == 'memberJoined') {
     $text = "WELCOME TO NCTS GROUP";
         $mreply = array(
@@ -75,8 +78,7 @@ if ($type == 'memberJoined') {
             )
         )
     );
-}
-elseif ($type == 'memberLeft') {
+}else if ($type == 'memberLeft') {
     $text = "MEMBER LEFT THE GROUP";
         $mreply = array(
         'replyToken' => $replyToken,
@@ -87,8 +89,7 @@ elseif ($type == 'memberLeft') {
             )
         )
     );
-}
-elseif ($type == 'join') {
+}else if ($type == 'join') {
       $text = "BOT JOIN THE GROUP";
     $mreply = array(
         'replyToken' => $replyToken,
@@ -99,8 +100,7 @@ elseif ($type == 'join') {
             )
         )
     );
-}
-elseif ($type == 'leave') {
+}else if ($type == 'leave') {
     $text = "BOT LEAVE THE GROUP";
         $mreply = array(
         'replyToken' => $replyToken,
@@ -111,8 +111,7 @@ elseif ($type == 'leave') {
             )
         )
     );
-}
-elseif ($type == 'follow') {
+}else if ($type == 'follow') {
     $text = "THANK YOU FOR FOLLOW OUR GROUP";
     $mreply = array(
         'replyToken' => $replyToken,
@@ -123,8 +122,7 @@ elseif ($type == 'follow') {
             )
         )
     );
-}
-elseif ($type == 'unfollow') {
+}else if ($type == 'unfollow') {
     $text = "BOT BLOCK THE GROUP";
         $mreply = array(
         'replyToken' => $replyToken,
@@ -135,59 +133,55 @@ elseif ($type == 'unfollow') {
             )
         )
     );
-}
-#-------------------------[MSG TYPE]-------------------------#
-elseif ($msg_type == 'file') {
-$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
-$headers = array('Authorization: Bearer ' . $channelAccessToken);
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$result = curl_exec($ch);
-curl_close($ch);
-$ran = date("YmdHis");
-$botDataUserFolder = './user/file/file/' . $userId;
-                    if(!file_exists($botDataUserFolder)) {
-                        mkdir($botDataUserFolder, 0777, true);
-                    } 
-$fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-$fileurl = $fol . $fileFullSavePath;
-file_put_contents($fileFullSavePath,$result);
-  $text = "SAVED";
-      $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => $text
-            ),
-            array(
-                'type' => 'text',
-                'text' => $fileurl
-            )
-        )
-    );
-}
-
-elseif ($msg_type == 'image') {
-$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
-$headers = array('Authorization: Bearer ' . $channelAccessToken);
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$result = curl_exec($ch);
-curl_close($ch);
-$ran = date("YmdHis");
-$botDataUserFolder = './user/file/image/' . $userId;
-                    if(!file_exists($botDataUserFolder)) {
-                        mkdir($botDataUserFolder, 0777, true);
-                    } 
-$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
-$picurl = $fol . $fileFullSavePath;
-file_put_contents($fileFullSavePath,$result);
-  $text = "SAVE IMAGE ALREADY";
+}else if ($msg_type == 'file') { 
+	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$headers = array('Authorization: Bearer ' . $channelAccessToken);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	$ran = date("YmdHis");
+	$botDataUserFolder = './user/file/file/' . $userId;
+		if(!file_exists($botDataUserFolder)) {
+			mkdir($botDataUserFolder, 0777, true);
+		} 
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
+	$fileurl = $fol . $fileFullSavePath;
+	file_put_contents($fileFullSavePath,$result);
+  	$text = "SAVED";
+		  $mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'text',
+					'text' => $text
+				),
+				array(
+					'type' => 'text',
+					'text' => $fileurl
+				)
+			)
+		);
+}else if ($msg_type == 'image') {
+	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$headers = array('Authorization: Bearer ' . $channelAccessToken);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	$ran = date("YmdHis");
+	$botDataUserFolder = './user/file/image/' . $userId;
+	if(!file_exists($botDataUserFolder)) {
+		mkdir($botDataUserFolder, 0777, true);
+	} 
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
+	$picurl = $fol . $fileFullSavePath;
+	file_put_contents($fileFullSavePath,$result);
+  	$text = "SAVE IMAGE ALREADY";
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
@@ -201,25 +195,24 @@ file_put_contents($fileFullSavePath,$result);
             )
         )
     );
-}
-elseif ($msg_type == 'video') {
-  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
-$headers = array('Authorization: Bearer ' . $channelAccessToken);
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$result = curl_exec($ch);
-curl_close($ch);
-$ran = date("YmdHis");
-$botDataUserFolder = './user/file/video/' . $userId;
-                    if(!file_exists($botDataUserFolder)) {
-                        mkdir($botDataUserFolder, 0777, true);
-                    } 
-$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
-$vidurl = $fol . $fileFullSavePath;
-file_put_contents($fileFullSavePath,$result);
-  $text = "SAVE VIDEO ALREADY";
+}else if ($msg_type == 'video') {
+	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$headers = array('Authorization: Bearer ' . $channelAccessToken);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	$ran = date("YmdHis");
+	$botDataUserFolder = './user/file/video/' . $userId;
+	if(!file_exists($botDataUserFolder)) {
+		 mkdir($botDataUserFolder, 0777, true);
+	} 
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.mp4';
+	$vidurl = $fol . $fileFullSavePath;
+	file_put_contents($fileFullSavePath,$result);
+  	$text = "SAVE VIDEO ALREADY";
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
@@ -233,25 +226,24 @@ file_put_contents($fileFullSavePath,$result);
             )
         )
     );
-}
-elseif ($msg_type == 'audio') {
-  $url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
-$headers = array('Authorization: Bearer ' . $channelAccessToken);
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-$result = curl_exec($ch);
-curl_close($ch);
-$ran = date("YmdHis");
-$botDataUserFolder = './user/file/audio/' . $userId;
-                    if(!file_exists($botDataUserFolder)) {
-                        mkdir($botDataUserFolder, 0777, true);
-                    } 
-$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
-$audurl = $fol . $fileFullSavePath;
-file_put_contents($fileFullSavePath,$result);
-  $text = "SAVE AUDIO ALREADY";
+}else if ($msg_type == 'audio') {
+	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$headers = array('Authorization: Bearer ' . $channelAccessToken);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	$ran = date("YmdHis");
+	$botDataUserFolder = './user/file/audio/' . $userId;
+	if(!file_exists($botDataUserFolder)) {
+		mkdir($botDataUserFolder, 0777, true);
+	} 
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.m4a';
+	$audurl = $fol . $fileFullSavePath;
+	file_put_contents($fileFullSavePath,$result);
+  	$text = "SAVE AUDIO ALREADY";
       $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
@@ -265,43 +257,40 @@ file_put_contents($fileFullSavePath,$result);
             )
         )
     );
-}
-elseif ($msg_type == 'sticker') {
+}else if ($msg_type == 'sticker') {
   $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
       $mreply = array(
         'replyToken' => $replyToken,
-        'messages' => array(
-          
-array(
-        'type' => 'flex',
-        'altText' => 'Sticker!!',
-        'contents' => array(
-        'type' => 'bubble',
-        'body' => array(
-          'type' => 'box',
-          'layout' => 'vertical',
-          'spacing' => 'md',
-          'contents' => array(
-            array(
-              'type' => 'text',
-          'align' => 'center',
-          'color' => '#049b1b',
-          'text' => 'USER : ' . $reline2
-      ),
-            array(
-          'type' => 'image',
-          'size' => '5xl',
-          'align' => 'center',
-          'url' => $stickerurl
-      )
-        )
-        )
-        )
-        )
-    )
-    );
-}elseif ($msg_type == 'location') {
-
+        	'messages' => array(
+         		array(
+					'type' => 'flex',
+					'altText' => 'Sticker!!',
+					'contents' => array(
+        				'type' => 'bubble',
+        					'body' => array(
+							  'type' => 'box',
+							  'layout' => 'vertical',
+							  'spacing' => 'md',
+							  'contents' => array(
+            					array(
+									'type' => 'text',
+								  	'align' => 'center',
+								  	'color' => '#049b1b',
+								  	'text' => 'USER : ' . $reline2
+							  	),
+            					array(
+								  'type' => 'image',
+								  'size' => '5xl',
+								  'align' => 'center',
+								  'url' => $stickerurl
+      							)
+       						 )
+        					)
+        				)
+        			)
+    			)
+    		);
+}else if($msg_type == 'location') {
     $uri = "https://api.openweathermap.org/data/2.5/weather?lat=" . $msg_latitude . "&lon=" . $msg_longitude . "&lang=th&units=metric&appid=bb32ab343bb6e3326f9e1bbd4e4f5d31";
     $response = Unirest\Request::get("$uri");
     $json = json_decode($response->raw_body, true);
@@ -332,47 +321,43 @@ array(
         )
     );
 
-}else { 
+}else{ 
 
-if ($command== 'myid') { 
-
-  $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
+	if ($command== 'myid'){ 
+			$mreply = array(
+        	'replyToken' => $replyToken,
+        	'messages' => array(
+            	array(
                 'type' => 'text',
                 'text' => 'YOUR userId '.$userId,
-'quickReply' => array(
-    'items' => array(
-     array(
-      'type' => 'action',
-      'action' => array(
-       'type' => 'postback',
-       'label' => 'Postback',
-       'data' => 'happy'
-      )
-     )
-    )
-   )
-
-            )
+				'quickReply' => array(
+    				'items' => array(
+     					array(
+      						  'type' => 'action',
+							  'action' => array(
+							   'type' => 'postback',
+							   'label' => 'Postback',
+							   'data' => 'happy'
+							  )
+     					)
+   				 )
+   			)
+		)
         )
-    );
-}
-
-elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
-      $url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
-      $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'image',
-                'originalContentUrl' => $url,
-                'previewImageUrl' => $url
-            )
-        )
-    );
-}else if($post_data=='appointment'){
+    	);
+	}else if ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
+      	$url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
+		  $mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'image',
+					'originalContentUrl' => $url,
+					'previewImageUrl' => $url
+				)
+			)
+		);
+	}else if($post_data=='appointment'){
 		$dd = explode("T",$post_param);
 		$d = $dd[0];
 		$t = $dd[1];
@@ -421,17 +406,18 @@ elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrc
     				)//end message
     			);//end mreply
 			
-}else {
+	}else{
                     $url = "https://bots.dialogflow.com/line/01af57d2-dabe-4472-b016-d2b94f766a51/webhook";		
-                    $headers = getallheaders();
+                    //$url = "https://dialogflow.cloud.google.com/v1/integrations/line/webhook/01af57d2-dabe-4472-b016-d2b94f766a51";
+					$headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
-                    file_put_contents('body.txt',file_get_contents('php://input'));
+                    file_put_contents('body.txt',$hook);
                     $headers['Host'] = "bots.dialogflow.com";
                     $json_headers = array();
                     foreach($headers as $k=>$v){
                         $json_headers[]=$k.":".$v;
                     }
-                    $inputJSON = file_get_contents('php://input');
+                    $inputJSON = $hook;
                     $ch = curl_init();
                     curl_setopt( $ch, CURLOPT_URL, $url);
                     curl_setopt( $ch, CURLOPT_POST, 1);
@@ -443,16 +429,15 @@ elseif ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrc
                     curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
                     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
                     $result = curl_exec( $ch );
-                    curl_close( $ch );
-					
-					
+                    curl_close( $ch );	
+	}
 }
-}
+
 if (isset($mreply)) {
     //$result = json_encode($mreply);
     $client->replyMessage($mreply);
 }  
-    file_put_contents('log.txt',file_get_contents('php://input'));
+    file_put_contents('log.txt',$hook);
 	
 
 
