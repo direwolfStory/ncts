@@ -1,6 +1,5 @@
 <?php
 
-	echo "HI";
 #-------------------------[Include]-------------------------#
 require_once('include/line_class.php');
 require_once('unirest-php-master/src/Unirest.php');
@@ -11,6 +10,8 @@ $fol = 'https://www.nctsc.com/nctsLineBot/';
 $hook = file_get_contents('php://input');
 #-------------------------[Events]-------------------------#
 
+/*$hash = hash_hmac('sha256', $hook, $channelSecret, true);
+$signature = base64_encode($hash);*/
 
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
