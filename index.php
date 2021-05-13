@@ -3,7 +3,7 @@
 require_once('include/line_class.php');
 require_once('unirest-php-master/src/Unirest.php');
 #-------------------------[Token]-------------------------#
-$channelAccessToken = '+RlsY/UNuJvTc40ql++1nnDp2HO4Y3+gqIof/3xHJNdc49sut0F5ZeJ5LDpBe78rfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7isUxf37s6NG1aVbi+u4XS57JZHsJNuU30aCEM2Yg38mrAdB04t89/1O/w1cDnyilFU='; 
+$channelAccessToken = 'OMb2UdOi3oE4jexM3pRhdslF5S+Ja1v89J2mkb089CnPSmNWIbzttLEvE7sBgrCkfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7iuhjmBfBTwgfDWa/W334GzWxqv9C2k6QFo2mJTHqxewpFGUYhWQfeY8sLGRXgo3xvw='; 
 $channelSecret = '2193018a4071996c9cd5d066e1855a75';
 $fol = 'https://www.nctsc.com/nctsLineBot/';
 $hook = file_get_contents('php://input');
