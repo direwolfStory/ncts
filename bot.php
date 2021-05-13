@@ -408,8 +408,7 @@ if ($type == 'memberJoined') {
     			);//end mreply
 			
 	}else{
-                    $url = "https://bots.dialogflow.com/line/01af57d2-dabe-4472-b016-d2b94f766a51/webhook";		
-                    //$url = "https://dialogflow.cloud.google.com/v1/integrations/line/webhook/01af57d2-dabe-4472-b016-d2b94f766a51";
+                    $url = "https://bots.dialogflow.com/line/01af57d2-dabe-4472-b016-d2b94f766a51/webhook";	
 					$headers = getallheaders();
                     file_put_contents('headers.txt',json_encode($headers, JSON_PRETTY_PRINT));          
                     file_put_contents('body.txt',$hook);
