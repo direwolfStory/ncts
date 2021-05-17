@@ -188,7 +188,7 @@ if ($type == 'memberJoined') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => $result
             ),
             array(
                 'type' => 'text',
