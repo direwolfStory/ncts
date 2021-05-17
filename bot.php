@@ -202,7 +202,7 @@ if ($type == 'memberJoined') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => $datasReturn['message']
             ),
             array(
                 'type' => 'text',
