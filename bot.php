@@ -178,11 +178,11 @@ if ($type == 'memberJoined') {
 	curl_close($ch);
 	$ran = date("YmdHis");
 	$botDataUserFolder = './user/file/image/' . $userId;
-	if(!file_exists($botDataUserFolder)) {
-		mkdir($botDataUserFolder, 0777, true);
-	} 
-	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.png';
-	$picurl = $fol . $fileFullSavePath;
+    if(!file_exists($botDataUserFolder)) {
+    	mkdir($botDataUserFolder, 0777, true);
+    } 
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
+	$picurl = 'https://secret-plateau-93073.herokuapp.com/' . $fileFullSavePath;
 	file_put_contents($fileFullSavePath,$result);
   	$text = "SAVE IMAGE ALREADY";
       $mreply = array(
@@ -190,7 +190,7 @@ if ($type == 'memberJoined') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $result
+                'text' => $text
             ),
             array(
                 'type' => 'text',
