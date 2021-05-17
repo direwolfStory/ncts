@@ -178,7 +178,7 @@ if ($type == 'memberJoined') {
 	$err = curl_error($ch);
 	curl_close($ch);
 	if($err){
-      $datasReturn['result'] = 's';
+      $datasReturn['result'] = 'e';
       $datasReturn['message'] = $err;
     }else{
       $datasReturn['result'] = 's';
