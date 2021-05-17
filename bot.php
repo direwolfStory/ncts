@@ -172,16 +172,18 @@ if ($type == 'memberJoined') {
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST,'GET');
 	$result = curl_exec($ch);
+	$err = curl_error($ch);
 	curl_close($ch);
 	$ran = date("YmdHis");
 	$botDataUserFolder = './user/file/image/' . $userId;
 	if(!file_exists($botDataUserFolder)) {
 		mkdir($botDataUserFolder, 0777, true);
 	} 
-	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.jpg';
+	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.png';
 	$picurl = $fol . $fileFullSavePath;
-	file_put_contents($fileFullSavePath,$result);
+	file_put_contents('user/file/image/test.png',$result);
   	$text = "SAVE IMAGE ALREADY";
       $mreply = array(
         'replyToken' => $replyToken,
