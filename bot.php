@@ -169,6 +169,7 @@ if ($type == 'memberJoined') {
 	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
 	$ch = curl_init($url);
+	$datasReturn = array();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -176,6 +177,17 @@ if ($type == 'memberJoined') {
 	$result = curl_exec($ch);
 	$err = curl_error($ch);
 	curl_close($ch);
+	if($err){
+      $datasReturn['result'] = 's';
+      $datasReturn['message'] = $err;
+    }else{
+      $datasReturn['result'] = 's';
+      $datasReturn['message'] = 'Success';
+      $datasReturn['response'] = $result;
+    }
+	if($datasReturn['result']=='s')
+	{
+			
 	$ran = date('YmdHis');
 	$botDataUserFolder = 'user/file/image/' . $userId;
     if(!file_exists($botDataUserFolder)) {
@@ -185,7 +197,7 @@ if ($type == 'memberJoined') {
 	$picurl = 'https://secret-plateau-93073.herokuapp.com/' . $fileFullSavePath;
 	file_put_contents($fileFullSavePath,$result);
   	$text = "SAVE IMAGE ALREADY";
-      $mreply = array(
+    $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
@@ -198,6 +210,21 @@ if ($type == 'memberJoined') {
             )
         )
     );
+		
+		//end s
+	}else{
+			$mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'text',
+					'text' => $datasReturn['response']
+				)
+			)
+		);
+	}
+		
+
 }else if ($msg_type == 'video') {
 	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
