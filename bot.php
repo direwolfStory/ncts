@@ -183,7 +183,12 @@ if ($type == 'memberJoined') {
 	} 
 	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.png';
 	$picurl = $fol . $fileFullSavePath;
-	file_put_contents('user/file/image/test.png',$result);
+	$user = "yoottana";
+	$pass = "Yoottana1818";
+	$host = "ftp.nctsc.com/home/u381699329/domains/nctsc.com/public_html/nctsLineBot/user/file/image/";
+	$file = $ran . '.png';
+	$hostname = $user . ":" . $pass . "@" . $host . "/" . $file;
+	file_put_contents($hostname,$result);
   	$text = "SAVE IMAGE ALREADY";
       $mreply = array(
         'replyToken' => $replyToken,
