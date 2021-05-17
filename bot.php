@@ -176,7 +176,7 @@ if ($type == 'memberJoined') {
 	$result = curl_exec($ch);
 	$err = curl_error($ch);
 	curl_close($ch);
-	$ran = date("YmdHis");
+	$ran = date('YmdHis');
 	$botDataUserFolder = 'user/file/image/' . $userId;
     if(!file_exists($botDataUserFolder)) {
     	mkdir($botDataUserFolder, 0777, true);
@@ -194,7 +194,7 @@ if ($type == 'memberJoined') {
             ),
             array(
                 'type' => 'text',
-                'text' => $picurl
+                'text' => $messageid
             )
         )
     );
