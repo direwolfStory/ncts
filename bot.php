@@ -202,8 +202,7 @@ if ($type == 'memberJoined') {
 	$chat_message = $picurl;
 	$status = 1;
 	$msgType = 2;
-	$dt = strtotime(date("Y-m-d H:i:s"));
-	$dt = date('Y-m-d H:i:s', $dt);
+	$dt = date('Y-m-d H:i:s');
 	
 	$sql = "
 	INSERT INTO chat_message 
