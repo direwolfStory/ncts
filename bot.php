@@ -213,12 +213,14 @@ if ($type == 'memberJoined') {
 	
 	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY chat_message_id DESC";
 	$q = $client->sel($sql);
-	$lastTime = $q[0]->timestamp;
+	
+	$lTime = $q[0]->timestamp;
 	
 	
-	$time   = strtotime($lastTime);
-	$time   = $time + (60*15); 
-	$now15 = date("Y-m-d H:i:s", $time);
+	$times   = strtotime($lTime);
+	$times   = $times + (60*15); 
+	$now15 = date("Y-m-d H:i:s", $times);
+	
 	
 	if($now15 < $dt)
 	{
