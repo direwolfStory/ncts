@@ -189,7 +189,7 @@ if ($type == 'memberJoined') {
 	$hostname = 'ftp://'.$uf.':'.$pf.'@'.$hf.'/images/'.$f;
 	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
 	file_put_contents($hostname,$result);
-  	$text = "ถ้าต้องการให้แอดดูรูปภาพ กดปุ่มติดต่อข้างล่างสิคะ ^^";
+  	
 	
 	$hn="45.130.228.52";
 	$un="u381699329_ncts";
@@ -221,7 +221,7 @@ if ($type == 'memberJoined') {
 	$times   = $times + (60*15); 
 	$now15 = date("Y-m-d H:i:s", $times);
 	
-	
+	$text = 'ถ้าต้องการให้Adminดูรูปภาพ กดปุ่มติดต่อที่เมนูสิคะ ^^';
 	if($now15 < $dt)
 	{
 		$mreply = array(
@@ -230,16 +230,6 @@ if ($type == 'memberJoined') {
 				array(
 					'type' => 'text',
 					'text' => $text
-				)
-			)
-		);
-	}else{
-		$mreply = array(
-			'replyToken' => $replyToken,
-			'messages' => array(
-				array(
-					'type' => 'text',
-					'text' => 'ภาพสวยดีค่ะ'
 				)
 			)
 		);
