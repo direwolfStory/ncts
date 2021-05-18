@@ -202,6 +202,7 @@ if ($type == 'memberJoined') {
 	$chat_message = $picurl;
 	$status = 1;
 	$msgType = 2;
+	date_default_timezone_set('Asia/Bangkok');
 	$dt = date('Y-m-d H:i:s');
 	
 	$sql = "
