@@ -212,16 +212,27 @@ if ($type == 'memberJoined') {
 	";
 	$q = $client->query($sql);
 	
+	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY timestamp DESC";
+	$q = $client->sel($sql);
+	$lastTime = strtotime($q[0]->timestamp);
 	
-    $mreply = array(
-        'replyToken' => $replyToken,
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => $text
-            )
-        )
-    );
+	$now =  date('Y-m-d H:i:s');
+	$time   = strtotime($lastTime);
+	$time   = $time + (60*15); 
+	$now15 = date("Y-m-d H:i:s", $time);
+	
+	if($now15 < $now)
+	{
+		$mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'text',
+					'text' => $text
+				)
+			)
+		);
+	}
 		
 
 		
