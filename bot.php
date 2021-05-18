@@ -71,7 +71,7 @@ $reline2 = $reline1['displayName'];
 $displayName = $reline1['displayName'];
 $pictureUrl =  $reline1['pictureUrl'];
 $statusMessage = $reline1['statusMessage'];
-
+$mreply=0;
 
 if ($type == 'memberJoined') {
     $text = "WELCOME TO NCTS GROUP";
@@ -211,7 +211,7 @@ if ($type == 'memberJoined') {
 	";
 	$q = $client->query($sql);
 	
-	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY timestamp DESC";
+	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY chat_message_id DESC";
 	$q = $client->sel($sql);
 	$lastTime = $q[0]->timestamp;
 	
@@ -473,7 +473,7 @@ if ($type == 'memberJoined') {
 	}
 }
 
-if (isset($mreply)) {
+if ($mreply != 0) {
     //$result = json_encode($mreply);
     $client->replyMessage($mreply);
 }  
