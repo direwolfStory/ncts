@@ -204,6 +204,12 @@ if ($type == 'memberJoined') {
 	date_default_timezone_set('Asia/Bangkok');
 	$dt = date('Y-m-d H:i:s');
 	
+	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY chat_message_id DESC";
+	$q = $client->sel($sql);
+	
+	$lTime = $q[0]->timestamp;
+	
+	
 	$sql = "
 	INSERT INTO chat_message 
 	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
@@ -211,10 +217,7 @@ if ($type == 'memberJoined') {
 	";
 	$q = $client->query($sql);
 	
-	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY chat_message_id DESC";
-	$q = $client->sel($sql);
 	
-	$lTime = $q[0]->timestamp;
 	
 	
 	$times   = strtotime($lTime);
@@ -230,17 +233,6 @@ if ($type == 'memberJoined') {
 				array(
 					'type' => 'text',
 					'text' => $text
-				)
-			)
-		);
-	}else{
-		$txt = $now15 . "_" . $dt;
-		$mreply = array(
-			'replyToken' => $replyToken,
-			'messages' => array(
-				array(
-					'type' => 'text',
-					'text' => $txt
 				)
 			)
 		);
