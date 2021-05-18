@@ -172,7 +172,7 @@ if ($type == 'memberJoined') {
 	$url = 'https://api.line.me/v2/bot/message/'.$messageid.'/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
 	$ch = curl_init();
-    curl_setopt_array($curl, array(
+    curl_setopt_array($ch, array(
       CURLOPT_URL =>   $url,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => "",
