@@ -3,7 +3,7 @@
 #-------------------------[Include]-------------------------#
 require_once('include/line_class.php');
 require_once('unirest-php-master/src/Unirest.php');
-require_once('nctsClass/fn.php');
+//require_once('nctsClass/fn.php');
 #-------------------------[Token]-------------------------#
 $channelAccessToken = 'OMb2UdOi3oE4jexM3pRhdslF5S+Ja1v89J2mkb089CnPSmNWIbzttLEvE7sBgrCkfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7iuhjmBfBTwgfDWa/W334GzWxqv9C2k6QFo2mJTHqxewpFGUYhWQfeY8sLGRXgo3xvw='; 
 $channelSecret = '2193018a4071996c9cd5d066e1855a75';
@@ -192,7 +192,7 @@ if ($type == 'memberJoined') {
 	file_put_contents($hostname,$result);
   	$text = "ถ้าต้องการให้แอดดูรูปภาพ กดปุ่มติดต่อข้างล่างสิคะ ^^";
 	
-	$n=new fn;
+	
 	$to_user_id = $adminId;
 	$memID = $userId;
 	$chat_message = $picurl;
@@ -201,12 +201,12 @@ if ($type == 'memberJoined') {
 	$dt = strtotime(date("Y-m-d H:i:s"));
 	$dt = date('Y-m-d H:i:s', $dt);
 	
-	$sql = "
+	/*$sql = "
 	INSERT INTO chat_message 
 	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
 	VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
 	";
-	$q = $n->query($sql);
+	$q = $n->query($sql);*/
 	
 	
     $mreply = array(
