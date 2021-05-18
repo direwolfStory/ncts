@@ -192,7 +192,11 @@ if ($type == 'memberJoined') {
 	file_put_contents($hostname,$result);
   	$text = "ถ้าต้องการให้แอดดูรูปภาพ กดปุ่มติดต่อข้างล่างสิคะ ^^";
 	
-	
+	$hn="45.130.228.52";
+	$un="u381699329_ncts";
+	$pn="nctsComputer18";
+	$db="u381699329_ncts";
+	$conn = mysqli_connect($hn,$un,$pn,$db);
 	$to_user_id = $adminId;
 	$memID = $userId;
 	$chat_message = $picurl;
@@ -201,12 +205,12 @@ if ($type == 'memberJoined') {
 	$dt = strtotime(date("Y-m-d H:i:s"));
 	$dt = date('Y-m-d H:i:s', $dt);
 	
-	/*$sql = "
+	$sql = "
 	INSERT INTO chat_message 
 	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
 	VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
 	";
-	$q = $n->query($sql);*/
+	$q = mysqli_query($conn,$sql);
 	
 	
     $mreply = array(
