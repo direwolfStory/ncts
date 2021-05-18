@@ -3,6 +3,7 @@
 #-------------------------[Include]-------------------------#
 require_once('include/line_class.php');
 require_once('unirest-php-master/src/Unirest.php');
+require_once('nctsClass/fn.php');
 #-------------------------[Token]-------------------------#
 $channelAccessToken = 'OMb2UdOi3oE4jexM3pRhdslF5S+Ja1v89J2mkb089CnPSmNWIbzttLEvE7sBgrCkfJdZPVbDTgkmX5L0avaYLvdlNrcSqAs0DCqx5Ape7iuhjmBfBTwgfDWa/W334GzWxqv9C2k6QFo2mJTHqxewpFGUYhWQfeY8sLGRXgo3xvw='; 
 $channelSecret = '2193018a4071996c9cd5d066e1855a75';
@@ -11,6 +12,8 @@ $hook = file_get_contents('php://input');
 $uf = "u381699329.ncts";
 $pf = "nctsComputer18";
 $hf = "ftp.nctsc.com";
+$adminId = 'U690c1463333f86b18d5d3f418801e7ca';
+
 #-------------------------[Events]-------------------------#
 
 /*$hash = hash_hmac('sha256', $hook, $channelSecret, true);
@@ -18,6 +21,7 @@ $signature = base64_encode($hash);*/
 
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
+$n= new fn();
 
 $userId     = $client->parseEvents()[0]['source']['userId'];
 $groupId    = $client->parseEvents()[0]['source']['groupId'];
@@ -183,11 +187,28 @@ if ($type == 'memberJoined') {
     if(!file_exists($botDataUserFolder)) {
     	mkdir($botDataUserFolder, 0777, true);
     } */
-	$f = $ran . '.png';
+	$f = $userId . "_" . $ran . '.png';
 	$hostname = 'ftp://'.$uf.':'.$pf.'@'.$hf.'/images/'.$f;
 	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
 	file_put_contents($hostname,$result);
   	$text = "ถ้าต้องการให้แอดดูรูปภาพ กดปุ่มติดต่อข้างล่างสิคะ ^^";
+	
+	$to_user_id = $adminId;
+	$memID = $userId;
+	$chat_message = $picurl;
+	$status = 1;
+	$msgType = 2;
+	$dt = strtotime(date("Y-m-d H:i:s"));
+	$dt = date('Y-m-d H:i:s', $dt);
+	
+	$sql = "
+	INSERT INTO chat_message 
+	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
+	VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
+	";
+	$q = $n->query($sql);
+	
+	
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
