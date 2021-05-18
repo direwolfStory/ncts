@@ -179,17 +179,7 @@ if ($type == 'memberJoined') {
 	$err = curl_error($ch);
 	curl_close($ch);
 	
-	$datasReturn = array();
-	if($err){
-      $datasReturn['result'] = 'e';
-      $datasReturn['message'] = $err;
-    }else{
-      $datasReturn['result'] = 's';
-      $datasReturn['message'] = 'Success';
-      $datasReturn['response'] = $result;
-    }
-	if($datasReturn['result']=='s')
-	{
+
 			
 	$ran = date('YmdHis');
 	/*$botDataUserFolder = 'user/file/image/' . $userId;
@@ -206,27 +196,16 @@ if ($type == 'memberJoined') {
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $text
+                'text' => $result
             ),
             array(
                 'type' => 'text',
-                'text' => $picurl
+                'text' => $messageid
             )
         )
     );
 		
-		//end s
-	}else{
-			$mreply = array(
-			'replyToken' => $replyToken,
-			'messages' => array(
-				array(
-					'type' => 'text',
-					'text' => $datasReturn['response']
-				)
-			)
-		);
-	}
+
 		
 
 }else if ($msg_type == 'video') {
