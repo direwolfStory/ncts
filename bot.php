@@ -233,6 +233,17 @@ if ($type == 'memberJoined') {
 				)
 			)
 		);
+	}else{
+		$txt = $now15 . "_" . $dt;
+		$mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'text',
+					'text' => $txt
+				)
+			)
+		);
 	}
 		
 
