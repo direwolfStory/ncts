@@ -210,7 +210,7 @@ if ($type == 'memberJoined') {
 	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
 	VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
 	";
-	$q = mysqli_query($conn,$sql);
+	$q = $client->query($sql);
 	
 	
     $mreply = array(
