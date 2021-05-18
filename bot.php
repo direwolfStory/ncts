@@ -178,9 +178,6 @@ if ($type == 'memberJoined') {
 	$result = curl_exec($ch);
 	$err = curl_error($ch);
 	curl_close($ch);
-	
-
-			
 	$ran = date('YmdHis');
 	/*$botDataUserFolder = 'user/file/image/' . $userId;
     if(!file_exists($botDataUserFolder)) {
@@ -190,17 +187,13 @@ if ($type == 'memberJoined') {
 	$hostname = 'ftp://'.$uf.':'.$pf.'@'.$hf.'/images/'.$f;
 	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
 	file_put_contents($hostname,$result);
-  	$text = "SAVE IMAGE ALREADY";
+  	$text = "ถ้าต้องการให้แอดดูรูปภาพ กดปุ่มติดต่อข้างล่างสิคะ ^^";
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $result
-            ),
-            array(
-                'type' => 'text',
-                'text' => $messageid
+                'text' => $text
             )
         )
     );
