@@ -22,12 +22,32 @@ if (!function_exists('hash_equals'))
 }
 class LINEBotTiny
 {
+	private $hn="45.130.228.52";
+	private $un="u381699329_ncts";
+	private $pn="nctsComputer18";
+	private $dn="u381699329_ncts";
+	
     public function __construct($channelAccessToken, $channelSecret)
     {
         $this->channelAccessToken = $channelAccessToken;
         $this->channelSecret = $channelSecret;
     }
   
+  	private function conn()
+	{
+		$con = new mysqli($this->hn,$this->un,$this->pn,$this->dn);
+		return $con;		
+	}
+	
+	public function query($sql)
+	{
+			//mysqli_query($this->conn(),$sql);
+			$q=mysqli_query($this->conn(),$sql);
+			if($q)
+			{
+				return $q;
+			}	
+	}
   
     public function parseEvents()
     {
