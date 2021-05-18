@@ -233,6 +233,16 @@ if ($type == 'memberJoined') {
 				)
 			)
 		);
+	}else{
+		$mreply = array(
+			'replyToken' => $replyToken,
+			'messages' => array(
+				array(
+					'type' => 'text',
+					'text' => 'ภาพสวยดีค่ะ'
+				)
+			)
+		);
 	}
 		
 
