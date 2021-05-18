@@ -41,12 +41,27 @@ class LINEBotTiny
 	
 	public function query($sql)
 	{
-			//mysqli_query($this->conn(),$sql);
 			$q=mysqli_query($this->conn(),$sql);
 			if($q)
 			{
 				return $q;
 			}	
+	}
+	
+	public function sel($sql)
+	{
+
+		$q = $this->query($sql);
+		$num= mysqli_num_rows($q);
+		$arr=array();		
+
+		for($i=0;$i<$num;$i++)
+		{
+			$data=mysqli_fetch_object($q);
+			$arr[$i]=$data;
+		}
+
+		return $arr;		
 	}
   
     public function parseEvents()
