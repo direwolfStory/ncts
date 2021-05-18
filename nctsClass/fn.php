@@ -66,8 +66,8 @@ class fn extends connect
 			{
 				return $q;
 			}else{
-				echo " <script>alert('เกิดข้อผิดพลาดกรุณาลองอีกครั้ง หรือติดต่อผู้ดูแลระบบด้วยค่ะ');window.history.back();</script>";
-				exit();	
+				return " <script>alert('เกิดข้อผิดพลาดกรุณาลองอีกครั้ง หรือติดต่อผู้ดูแลระบบด้วยค่ะ');window.history.back();</script>";
+				//exit();	
 			}		
 	}
 	
