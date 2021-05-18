@@ -197,7 +197,7 @@ if ($type == 'memberJoined') {
     	mkdir($botDataUserFolder, 0777, true);
     } */
 	$f = $ran . '.png';
-	$hostname = 'ftp://'.$user.':'.$pass.'@'.$host.'/images/'.$f;
+	$hostname = 'ftp://'.$uf.':'.$pf.'@'.$hf.'/images/'.$f;
 	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
 	file_put_contents($hostname,$result);
   	$text = "SAVE IMAGE ALREADY";
