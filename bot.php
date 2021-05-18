@@ -171,10 +171,21 @@ if ($type == 'memberJoined') {
 }else if ($msg_type == 'image') {
 	$url = 'https://api.line.me/v2/bot/message/'.$messageid.'/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$ch = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL =>   $url,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_POSTFIELDS => "",
+      CURLOPT_HTTPHEADER => array(
+        "Authorization: Bearer ".$channelAccessToken,
+        "cache-control: no-cache"
+      ),
+    ));
 	$result = curl_exec($ch);
 	$err = curl_error($ch);
 	curl_close($ch);
