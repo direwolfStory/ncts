@@ -201,12 +201,12 @@ if ($type == 'memberJoined') {
 	$dt = strtotime(date("Y-m-d H:i:s"));
 	$dt = date('Y-m-d H:i:s', $dt);
 	
-	$sql = "
+	/*$sql = "
 	INSERT INTO chat_message 
 	(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
 	VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
 	";
-	$q = $n->query($sql);
+	$q = $n->query($sql);*/
 	
 	
     $mreply = array(
