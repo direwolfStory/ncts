@@ -8,6 +8,9 @@ $channelAccessToken = 'OMb2UdOi3oE4jexM3pRhdslF5S+Ja1v89J2mkb089CnPSmNWIbzttLEvE
 $channelSecret = '2193018a4071996c9cd5d066e1855a75';
 $fol = 'https://www.nctsc.com/nctsLineBot/';
 $hook = file_get_contents('php://input');
+$uf = "u381699329.ncts";
+$pf = "nctsComputer18";
+$hf = "ftp.nctsc.com";
 #-------------------------[Events]-------------------------#
 
 /*$hash = hash_hmac('sha256', $hook, $channelSecret, true);
@@ -189,20 +192,21 @@ if ($type == 'memberJoined') {
 	{
 			
 	$ran = date('YmdHis');
-	$botDataUserFolder = 'user/file/image/' . $userId;
+	/*$botDataUserFolder = 'user/file/image/' . $userId;
     if(!file_exists($botDataUserFolder)) {
     	mkdir($botDataUserFolder, 0777, true);
-    } 
-	$fileFullSavePath = $botDataUserFolder . '/' . $ran . '.png';
-	$picurl = 'https://secret-plateau-93073.herokuapp.com/' . $fileFullSavePath;
-	file_put_contents($fileFullSavePath,$result);
+    } */
+	$f = $ran . '.png';
+	$hostname = 'ftp://'.$user.':'.$pass.'@'.$host.'/images/'.$f;
+	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
+	file_put_contents($hostname,$result);
   	$text = "SAVE IMAGE ALREADY";
     $mreply = array(
         'replyToken' => $replyToken,
         'messages' => array(
             array(
                 'type' => 'text',
-                'text' => $messageid
+                'text' => $text
             ),
             array(
                 'type' => 'text',
@@ -473,4 +477,3 @@ if (isset($mreply)) {
 ?>
 
     
-
