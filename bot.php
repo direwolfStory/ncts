@@ -214,7 +214,7 @@ if ($type == 'memberJoined') {
 	
 	$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY timestamp DESC";
 	$q = $client->sel($sql);
-	$lastTime = strtotime($q[0]->timestamp);
+	$lastTime = $q[0]->timestamp;
 	
 	$now =  date('Y-m-d H:i:s');
 	$time   = strtotime($lastTime);
