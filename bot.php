@@ -169,17 +169,17 @@ if ($type == 'memberJoined') {
 			)
 		);
 }else if ($msg_type == 'image') {
-	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$url = 'https://api.line.me/v2/bot/message/'.$messageid.'/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
 	$ch = curl_init($url);
-	$datasReturn = array();
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST,'GET');
 	$result = curl_exec($ch);
 	$err = curl_error($ch);
 	curl_close($ch);
+	
+	$datasReturn = array();
 	if($err){
       $datasReturn['result'] = 'e';
       $datasReturn['message'] = $err;
