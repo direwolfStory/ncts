@@ -27,6 +27,7 @@ class LINEBotTiny
 	private $pn="nctsComputer18";
 	private $dn="u381699329_ncts";
 	
+	
     public function __construct($channelAccessToken, $channelSecret)
     {
         $this->channelAccessToken = $channelAccessToken;
@@ -62,6 +63,50 @@ class LINEBotTiny
 		}
 
 		return $arr;		
+	}
+	
+	public function setMsgType($msgType,$userId,$adminId,$picurl)
+	{
+		$to_user_id = $adminId;
+		$memID = $userId;
+		$chat_message = $picurl;
+		$status = 1;
+		$msgType = $msgType;
+		date_default_timezone_set('Asia/Bangkok');
+		$dt = date('Y-m-d H:i:s');
+		
+		$sql = "select * from chat_message where from_user_id = '$userId' ORDER BY chat_message_id DESC";
+		$q = $this->sel($sql);
+		
+		$lTime = $q[0]->timestamp;
+		
+		
+		$sql = "
+		INSERT INTO chat_message 
+		(to_user_id, from_user_id, chat_message,timestamp, status,chatBy,msgType) 
+		VALUES ('$to_user_id','$memID','$chat_message','$dt','$status','user','$msgType')
+		";
+		$q = $this->query($sql);
+		
+		$times   = strtotime($lTime);
+		$times   = $times + (60*15); 
+		$now15 = date("Y-m-d H:i:s", $times);
+		
+		$text = 'ถ้าต้องการให้Adminดูรูปภาพ กดปุ่มติดต่อที่เมนูสิคะ ^^';
+		if($now15 < $dt)
+		{
+			return $mreply = array(
+				'replyToken' => $replyToken,
+				'messages' => array(
+					array(
+						'type' => 'text',
+						'text' => $text
+					)
+				)
+			);
+		}else{
+			return 0;	
+		}
 	}
   
     public function parseEvents()
