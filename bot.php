@@ -12,6 +12,10 @@ $uf = "u381699329.ncts";
 $pf = "nctsComputer18";
 $hf = "ftp.nctsc.com";
 $adminId = 'U690c1463333f86b18d5d3f418801e7ca';
+$hn="45.130.228.52";
+$un="u381699329_ncts";
+$pn="nctsComputer18";
+$db="u381699329_ncts";
 
 #-------------------------[Events]-------------------------#
 
@@ -140,36 +144,24 @@ if ($type == 'memberJoined') {
         )
     );
 }else if ($msg_type == 'file') { 
-	$url = 'https://api.line.me/v2/bot/message/' . $messageid . '/content';
+	$url = 'https://api-data.line.me/v2/bot/message/'.$messageid.'/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 	$result = curl_exec($ch);
+	$err = curl_error($ch);
 	curl_close($ch);
-	$ran = date("YmdHis");
-	$botDataUserFolder = './user/file/file/' . $userId;
-		if(!file_exists($botDataUserFolder)) {
-			mkdir($botDataUserFolder, 0777, true);
-		} 
-	$fileFullSavePath = $botDataUserFolder . '/' . $ran . $msg_file;
-	$fileurl = $fol . $fileFullSavePath;
-	file_put_contents($fileFullSavePath,$result);
-  	$text = "SAVED";
-		  $mreply = array(
-			'replyToken' => $replyToken,
-			'messages' => array(
-				array(
-					'type' => 'text',
-					'text' => $text
-				),
-				array(
-					'type' => 'text',
-					'text' => $fileurl
-				)
-			)
-		);
+	$ran = date('YmdHis');
+	$f = $userId . "_" . $ran . $msg_file;
+	$hostname = 'ftp://'.$uf.':'.$pf.'@'.$hf.'/images/'.$f;
+	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
+	file_put_contents($hostname,$result);
+	
+	$mreply = setMsgType($msgType,$userId,$adminId,$picurl);
+	
+	
 }else if ($msg_type == 'image') {
 	$url = 'https://api-data.line.me/v2/bot/message/'.$messageid.'/content';
 	$headers = array('Authorization: Bearer ' . $channelAccessToken);
@@ -190,11 +182,6 @@ if ($type == 'memberJoined') {
 	$picurl = 'https://www.nctsc.com/nctsLineBot/user/myFile/images/' . $f;
 	file_put_contents($hostname,$result);
   	
-	
-	$hn="45.130.228.52";
-	$un="u381699329_ncts";
-	$pn="nctsComputer18";
-	$db="u381699329_ncts";
 	$conn = mysqli_connect($hn,$un,$pn,$db);
 	$to_user_id = $adminId;
 	$memID = $userId;
@@ -304,7 +291,7 @@ if ($type == 'memberJoined') {
         )
     );
 }else if ($msg_type == 'sticker') {
-  $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
+ $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
       $mreply = array(
         'replyToken' => $replyToken,
         	'messages' => array(
@@ -335,7 +322,7 @@ if ($type == 'memberJoined') {
         				)
         			)
     			)
-    		);
+    		); 
 }else if($msg_type == 'location') {
     $uri = "https://api.openweathermap.org/data/2.5/weather?lat=" . $msg_latitude . "&lon=" . $msg_longitude . "&lang=th&units=metric&appid=bb32ab343bb6e3326f9e1bbd4e4f5d31";
     $response = Unirest\Request::get("$uri");
@@ -392,7 +379,7 @@ if ($type == 'memberJoined') {
         )
     	);
 	}else if ($command== 'qr' || $command== 'Qr' || $command== 'QR' || $command== 'Qrcode' || $command== 'QRcode' || $command== 'qrcode') { 
-      	$url = 'https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl='.$options;
+      	$url = 'https://www.nctsc.com/nctsAdsLineBot/images/QR.png';
 		  $mreply = array(
 			'replyToken' => $replyToken,
 			'messages' => array(
@@ -485,7 +472,39 @@ if ($mreply != 0) {
     file_put_contents('log.txt',$hook);
 	
 
-
+/*
+$stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $stickerId . "/android/sticker.png";
+      $mreply = array(
+        'replyToken' => $replyToken,
+        	'messages' => array(
+         		array(
+					'type' => 'flex',
+					'altText' => 'Sticker!!',
+					'contents' => array(
+        				'type' => 'bubble',
+        					'body' => array(
+							  'type' => 'box',
+							  'layout' => 'vertical',
+							  'spacing' => 'md',
+							  'contents' => array(
+            					array(
+									'type' => 'text',
+								  	'align' => 'center',
+								  	'color' => '#049b1b',
+								  	'text' => 'USER : ' . $reline2
+							  	),
+            					array(
+								  'type' => 'image',
+								  'size' => '5xl',
+								  'align' => 'center',
+								  'url' => $stickerurl
+      							)
+       						 )
+        					)
+        				)
+        			)
+    			)
+    		);
+*/
 ?>
 
-    
