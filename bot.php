@@ -212,8 +212,8 @@ if ($type == 'memberJoined') {
 	$now15 = date("Y-m-d H:i:s", $times);
 	
 	$text = 'บันทึกรูปภาพคุณ '.$reline2.'เรียบร้อยแล้วค่ะ';
-	if($now15 < $dt)
-	{
+	//if($now15 < $dt)
+	//{
 		$mreply = array(
 			'replyToken' => $replyToken,
 			'messages' => array(
@@ -223,7 +223,7 @@ if ($type == 'memberJoined') {
 				)
 			)
 		);
-	}
+	//}
 		
 
 		
