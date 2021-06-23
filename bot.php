@@ -211,7 +211,7 @@ if ($type == 'memberJoined') {
 	$times   = $times + (60*15); 
 	$now15 = date("Y-m-d H:i:s", $times);
 	
-	$text = 'ถ้าต้องการให้Adminดูรูปภาพ กดปุ่มติดต่อที่เมนูสิคะ ^^';
+	$text = 'บันทึกรูปภาพคุณ '.$reline2.'เรียบร้อยแล้วค่ะ';
 	if($now15 < $dt)
 	{
 		$mreply = array(
@@ -507,4 +507,3 @@ $stickerurl = "https://stickershop.line-scdn.net/stickershop/v1/sticker/" . $sti
     		);
 */
 ?>
-
